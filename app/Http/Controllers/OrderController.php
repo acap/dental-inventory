@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\DentalOrder;
+use App\Http\Model\OrderItem;
+use App\Http\Model\StockCode;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Http\Request;
@@ -89,11 +91,33 @@ class OrderController extends Controller
     function detail($orderNo)
     {
         info("order no : " . $orderNo);
+
+        $stockCodes = StockCode::all();
         $order = DentalOrder::where('ORDER_NO', "=", $orderNo)
             ->first();
 
-        info("found: " . print_r($order, 1));
+        $orderItems = OrderItem::where('ORDER_ID', "=", $order->ID)
+            ->get();
+
         return view("orders.detail")
-            ->with("order", $order);
+            ->with("order", $order)
+            ->with("orderItems", $orderItems)
+            ->with("stockCodes", $stockCodes);
     }
+
+
+    function post_add_item($orderNo)
+    {
+        $stockCodeId = $_POST['stock_code_id'];
+        $quantity = $_POST['quantity'];
+        $order = DentalOrder::where('ORDER_NO', "=", $orderNo)
+            ->first();
+        OrderItem::create([
+            'ORDER_ID' => $order->ID,
+            'STOCK_CODE_ID' => $stockCodeId,
+            'QUANTITY' => $quantity
+        ]);
+        return redirect("orders/detail/" . $orderNo);
+    }
+
 }

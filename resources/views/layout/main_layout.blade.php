@@ -20,6 +20,7 @@
 
 @include('layout.footer')
 @include('layout.footer-scripts')
+@yield('main-script')
 
 </body>
 </html>

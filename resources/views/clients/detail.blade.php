@@ -25,16 +25,20 @@
                 <div class="row m-t-25">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">Detail Form</div>
+                            <div class="card-header">Client #{{$client->IC_NO}}</div>
                             <div class="card-body">
-                                <div class="card-title">
-                                    <h3 class="text-center title-2">Add Detail {{$client->IC_NO}}</h3>
+                                <div class="row">
+                                    <div class="col-md-3">Name</div>
+                                    <div class="col-md-9">{{$client->NAME}}</div>
                                 </div>
-                                <hr>
-                                {{$client->NAME}}<br />
-                                {{$client->IC_NO}}<br />
-                                {{$client->ADDRESS}}<br />
-                                {{$client->PHONE_NO}}
+                                <div class="row">
+                                    <div class="col-md-3">Description</div>
+                                    <div class="col-md-9">{{$client->PHONE_NO}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">Description</div>
+                                    <div class="col-md-9">{{$client->ADDRESS}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>

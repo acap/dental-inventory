@@ -13,7 +13,7 @@
                                     <h3 class="text-center title-2">Add Client</h3>
                                 </div>
                                 <hr>
-                                <form action="post_add" method="post" novalidate="novalidate">
+                                <form action="{{url('/clients/post_add')}}" method="post" novalidate="novalidate">
                                     @csrf
                                     <div class="form-group">
                                         <label for="name" class="control-label mb-1">NAME</label>

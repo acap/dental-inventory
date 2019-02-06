@@ -17,29 +17,27 @@
                 </div>
                 <div class="row">
                     <div class="col-md-12 m-t-25">
-                        <div class="table-responsive table--no-card m-b-30">
+                        <div class="table-responsive table--no-card m-b-40">
                             <table class="table table-borderless table-striped table-earning">
                                 <thead>
                                 <tr>
                                     <th>NAME</th>
                                     <th>IC NUMBER</th>
-                                    <th>DETAIL</th>
+                                    <th>PHONE NO</th>
                                 </tr>
                                 </thead>
 
-                                //this is looping the data and why we use loop to make the data come out
+                                {{--this is looping the data and why we use loop to make the data come out--}}
                                 @foreach ($clientList as $client)
-                                    <tr>
+                                    <tr class='clickable-row' data-href='{{url('/clients/detail/' .$client->IC_NO)}}'>
                                         <td>
                                             {{$client ->NAME}}
                                         </td>
                                         <td>
-                                            <a href="{{url('clients/detail/'.$client->IC_NO)}}">
-                                                {{$client->IC_NO}}
-                                            </a>
+                                            {{$client->IC_NO}}
                                         </td>
                                         <td>
-                                            <button class="au-btn au-btn-icon au-btn--blue2" onclick="viewDetail()"><i class="zmdi"></i>detail</button>
+                                            {{$client->PHONE_NO}}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -50,15 +48,20 @@
             </div>
         </div>
     </div>
-
-    <script>
-        function addClient() {
-            window.location.assign('/dentalInventory/public/clients/add');
-        }
-//        function viewDetail() {
-//            window.location.assign('/dentalInventory/public/clients/detail');
-//        }
-    </script>
-
-
 @endsection
+
+@section('main-script')
+    <script>
+
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
+                window.location = $(this).data("href");
+            });
+        });
+
+        function addClient() {
+            window.location.assign('{{url('/clients/add')}}');
+        }
+    </script>
+@endsection
+

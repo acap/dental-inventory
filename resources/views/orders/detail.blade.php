@@ -6,36 +6,49 @@
             <div class="container-fluid">
 
                 <div class="row ">
-                    <div class="col-md-12">
+                    <div class="col-md-6">
                         <div class="overview-wrap">
                             <h2 class="title-1">Order</h2>
-                            <button class="au-btn au-btn-icon au-btn--blue" onclick="listOrder()">
-                                <i class="zmdi zmdi-toys"></i>list order
-                            </button>
-                            <button class="au-btn au-btn-icon au-btn--blue" onclick="editOrder('{{$order->ORDER_NO}}')">
-                                <i class="zmdi zmdi-edit"></i>edit order
-                            </button>
-                            <button class="au-btn au-btn-icon au-btn--blue" onclick="addOrder()">
-                                <i class="zmdi zmdi-plus"></i>add order
-                            </button>
                         </div>
+                    </div>
+                    <div class="col-md-6">
+                        <button class="au-btn au-btn-icon au-btn--blue" onclick="listOrder()">
+                            <i class="zmdi zmdi-toys"></i>list order
+                        </button>
+                        <button class="au-btn au-btn-icon au-btn--blue" onclick="editOrder('{{$order->ORDER_NO}}')">
+                            <i class="zmdi zmdi-edit"></i>edit order
+                        </button>
+                        <button class="au-btn au-btn-icon au-btn--blue" onclick="addOrder()">
+                            <i class="zmdi zmdi-plus"></i>add order
+                        </button>
                     </div>
                 </div>
 
                 <div class="row m-t-25">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">Order Form</div>
+                            <div class="card-header">Order #{{$order->ORDER_NO}}</div>
                             <div class="card-body">
-                                <div class="card-title">
-                                    <h3 class="text-center title-2">Add Order {{$order->ORDER_NO}}</h3>
+                                <div class="row">
+                                    <div class="col-md-3">Name</div>
+                                    <div class="col-md-9">{{$order->NAME}}</div>
                                 </div>
-                                <hr>
-                                {{$order->NAME}}
-                                {{$order->DESCRIPTION}}
-                                {{$order->TOTAL_AMOUNT}}
-                                {{$order->DATE_DELIVERY}}
-                                {{$order->STATUS}}
+                                <div class="row">
+                                    <div class="col-md-3">Description</div>
+                                    <div class="col-md-9">{{$order->DESCRIPTION}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">Description</div>
+                                    <div class="col-md-9">{{$order->TOTAL_AMOUNT}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">Delivery</div>
+                                    <div class="col-md-9">{{$order->DATE_DELIVERY}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">Status</div>
+                                    <div class="col-md-9">{{$order->STATUS}}</div>
+                                </div>
                             </div>
                         </div>
                     </div>
@@ -43,50 +56,96 @@
 
                 <div class="row m-t-25">
                     <div class="col-lg-12">
-                        <div class="card">
-                            <div class="card-header">Stock</div>
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h3 class="text-center title-2">Stock List</h3>
-                                </div>
-                                <table class="table table-bordered">
-                                    <thead>
+                        <div class="table-data__tool">
+                            <div class="table-data__tool-left">
+                                <h2 class="title-1">Order Item</h2>
+                            </div>
+                            <div class="table-data__tool-right">
+                                <button class="au-btn au-btn-icon au-btn--green au-btn--small"
+                                        data-toggle="modal"
+                                        data-target="#orderItemModal">
+                                    <i class="zmdi zmdi-plus"></i>add item
+                                </button>
+                            </div>
+                        </div>
+                        <div class="table-responsive table--no-card m-b-40">
+                            <table class="table table-borderless table-striped table-earning">
+                                <thead>
+                                <tr>
+                                    <th>Stock Code</th>
+                                    <th>Quantity</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($orderItems as $orderItem)
                                     <tr>
-                                        <th>Stock Code</th>
-                                        <th>Quantity</th>
+                                        <td>{{$orderItem->STOCK_CODE_ID}}</td>
+                                        <td>{{$orderItem->QUANTITY}}</td>
                                     </tr>
-                                    </thead>
-                                    <tbody>
-                                        <tr>
-                                            <td>G300 - False teeth</td>
-                                            <td>2</td>
-                                        </tr>
-                                        <tr>
-                                            <td>G301 - Screw</td>
-                                            <td>4</td>
-                                        </tr>
-                                    </tbody>
-                                </table>
-
-                            </div>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
-
-
             </div>
         </div>
     </div>
 
+    {{--order item modal--}}
+    <div class="modal fade" id="orderItemModal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg" role="document">
+            <form action="{{url('/orders/post_add_item')}}/{{$order->ORDER_NO}}" method="post" novalidate="novalidate">
+                @csrf
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="largeModalLabel">Order Item</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label for="stock_code_id" class=" form-control-label">Select Stock Code</label>
+                            <select name="stock_code_id" id="stock_code_id"
+                                    class="form-control-lg form-control">
+                                <option value="0">Please select</option>
+                                @foreach($stockCodes as $stockCode)
+                                    <option value="{{$stockCode->ID}}">{{$stockCode->CODE}}
+                                        -{{$stockCode->DESCRIPTION}}</option>
+                                @endforeach
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label for="quantity" class="control-label mb-1">Quantity</label>
+                            <input id="quantity" name="quantity" type="text" class="form-control"
+                                   aria-required="true" aria-invalid="false">
+                        </div>
+                        <div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="submit" class="btn btn-primary">Add</button>
+                    </div>
+                </div>
+            </form>
+        </div>
+    </div>
+
     <script>
-        function listOrder(){
-            window.location.assign('/dentalInventory/public/orders/list');
+        function listOrder() {
+            window.location.assign('{{url('orders/list')}}');
         }
-        function addOrder(){
-            window.location.assign('/dentalInventory/public/orders/add');
+
+        function addOrder() {
+            window.location.assign('{{url('orders/add')}}');
         }
-        function editOrder(orderNo){
-            window.location.assign('/dentalInventory/public/orders/edit/' + orderNo);
+
+        function editOrder(orderNo) {
+            window.location.assign('{{url('orders/edit')}}/' + orderNo);
+        }
+
+        function addOrderItem(orderNo) {
         }
     </script>
 

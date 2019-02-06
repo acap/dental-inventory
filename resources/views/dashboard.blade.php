@@ -49,13 +49,13 @@
 
     <script>
         function addOrder() {
-            window.location.assign('/dentalInventory/public/orders/add');
+            window.location.assign('{{url('/orders/add')}}');
         }
         function addStock() {
-            window.location.assign('/dentalInventory/public/stocks/add');
+            window.location.assign('{{url('/stocks/add')}}');
         }
         function addClient() {
-            window.location.assign('/dentalInventory/public/clients/add');
+            window.location.assign('{{url('/clients/add')}}');
         }
     </script>
 @endsection

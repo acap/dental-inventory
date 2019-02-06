@@ -8,7 +8,7 @@
                 <div class="row">
                     <div class="col-md-12">
                         <div class="overview-wrap">
-                            <h2 class="title-1">Order</h2>
+                            <h2 class="title-1">Stocks</h2>
                             <button class="au-btn au-btn-icon au-btn--blue" onclick="addStock()">
                                 <i class="zmdi zmdi-plus"></i>add stock
                             </button>
@@ -44,9 +44,12 @@
         </div>
     </div>
 
+@endsection
+
+@section('main-script')
     <script>
         function addStock() {
-            window.location.assign('/dentalInventory/public/stocks/add');
+            window.location.assign('{{url('/stocks/add')}}');
         }
     </script>
 @endsection
