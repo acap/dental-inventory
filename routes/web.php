@@ -38,6 +38,7 @@ Route::post('/clients/post_add', 'ClientController@post_add');
 Route::get('/clients/list', 'ClientController@list');
 Route::get('/clients/detail/{ic_no}', 'ClientController@detail');
 
+Route::get('/calendars/calendar', 'CalendarController@calendar');
 
 
 
