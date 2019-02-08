@@ -32,6 +32,8 @@ Route::post('/stocks/post_add', 'StockController@post_add');
 Route::get('/stockCodes/list', 'StockCodeController@list');
 Route::get('/stockCodes/add', 'StockCodeController@add');
 Route::post('/stockCodes/post_add', 'StockCodeController@post_add');
+Route::get('/stockCodes/edit/{code}', 'StockCodeController@edit');
+Route::post('/stockCodes/post_edit', 'StockCodeController@post_edit');
 
 Route::get('/clients/add','ClientController@add');
 Route::post('/clients/post_add', 'ClientController@post_add');
