@@ -33,14 +33,16 @@
                                                     <th>ID</th>
                                                     <th>Stock</th>
                                                     <th>Quantity</th>
+                                                    <th>Price</th>
                                                 </tr>
                                                 </thead>
                                                 <tbody>
                                                 @foreach($stockCodeList as $stockCode)
-                                                    <tr>
+                                                    <tr class='clickable-row' data-href='{{url('/stockCodes/edit/' .$stockCode->CODE)}}' >
                                                         <td>{{$stockCode -> ID}}</td>
                                                         <td>{{$stockCode -> CODE}}</td>
                                                         <td>{{$stockCode -> DESCRIPTION}}</td>
+                                                        <td>{{$stockCode -> PRICE}}</td>
                                                     </tr>
                                                 @endforeach
                                                 </tbody>
@@ -56,7 +58,16 @@
         </div>
     </div>
 
+
+@endsection
+@section('main-script')
     <script>
+
+        jQuery(document).ready(function($) {
+            $(".clickable-row").click(function() {
+                window.location = $(this).data("href");
+            });
+        });
         function addStockCode() {
             window.location.assign('{{url('/stockCodes/add')}}');
         }

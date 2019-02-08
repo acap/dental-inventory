@@ -7,31 +7,35 @@
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="card">
-                            <div class="card-header">Stock Form</div>
+                            <div class="card-header">stockCode Form</div>
                             <div class="card-body">
                                 <div class="card-title">
-                                    <h3 class="text-center title-2">Add Stock Code</h3>
+                                    <h3 class="text-center title-2">Edit stockCode</h3>
                                 </div>
                                 <hr>
-                                <form action="post_add" method="post" novalidate="novalidate">
+                                <form action="{{url('stockCodes/post_edit')}}" method="post" novalidate="novalidate">
                                     @csrf
-
                                     <div class="form-group">
                                         <label for="code" class="control-label mb-1">Code</label>
-                                        <input id="code" name="code" type="text" class="form-control"
-                                               aria-required="true" aria-invalid="false">
+                                        <input id="code" name="code" type="text"
+                                               value="{{$stockCode->CODE}}"
+                                               class="form-control"
+                                               aria-required="true" aria-invalid="false" readonly>
                                     </div>
                                     <div class="form-group">
                                         <label for="description" class="control-label mb-1">Description</label>
-                                        <input id="description" name="description" type="text" class="form-control"
+                                        <input id="description" name="description" type="text"
+                                               value="{{$stockCode->DESCRIPTION}}"
+                                               class="form-control"
                                                aria-required="true" aria-invalid="false">
                                     </div>
                                     <div class="form-group">
-                                        <label for="price" class="control-label mb-1">Pricing</label>
-                                        <input id="price" name="price" type="text" class="form-control"
+                                        <label for="price" class="control-label mb-1">Total Amount</label>
+                                        <input id="price" name="price" type="text"
+                                               value="{{$stockCode->PRICE}}"
+                                               class="form-control"
                                                aria-required="true" aria-invalid="false">
                                     </div>
-
                                     <div>
                                         <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">
                                             <i class="fa fa-lock fa-lg"></i>&nbsp;Submit
