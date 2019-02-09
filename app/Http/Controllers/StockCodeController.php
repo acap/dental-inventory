@@ -15,8 +15,12 @@ class StockCodeController extends Controller
 {
     function list()
     {
+        // STOCKCODE NIE ADALAH MODAL YANG MANA DIA AMBK SMUE DATA DARI DB MGGUNAKAN MODAL
+        //RETURN NI LAK DIA CKP KEMBALIKN VIEW PAGE STOCKCODE LIST
+        // WITH NIE ADALAH FUNCTION 
         $stockCodeList = StockCode::all();
-        return view("stockCodes.list")->with('stockCodeList', $stockCodeList);
+        return view("stockCodes.list")
+            ->with('stockCodeList', $stockCodeList);
     }
 
     function add()
@@ -28,13 +32,44 @@ class StockCodeController extends Controller
     {
         $code = $_POST['code'];
         $description = $_POST['description'];
+        $price = $_POST['price'];
 
         StockCode::create([
             'CODE'=> $code,
-            'DESCRIPTION'=>$description
+            'DESCRIPTION'=>$description,
+            'PRICE'=>$price
         ]);
 
         return redirect('stockCodes/list');
     }
 
+    function edit($code)
+    {
+        info("stock code no : " . $code);
+        $stockCode = StockCode::where('CODE', "=", $code)
+            ->first();
+
+        return view("stockCodes.edit")
+            ->with("stockCode", $stockCode);
+    }
+
+    function post_edit()
+    {
+        //DIA MSUKKN KEDALAM MODAL MANA MODAL ADALAH CONNECTION GN DB
+        // VARIABLE
+        // METHOD POST
+
+        $code = $_POST['code'];
+        $description = $_POST['description'];
+        $price = $_POST['price'];
+
+        $stockCode = StockCode::where("CODE", "=", $code);
+
+        $stockCode->update([
+            'DESCRIPTION'=>$description,
+            'PRICE'=>$price
+        ]);
+
+        return redirect('stockCodes/list');
+    }
 }

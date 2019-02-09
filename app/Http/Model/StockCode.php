@@ -14,5 +14,5 @@ use Illuminate\Database\Eloquent\Model;
 class StockCode extends Model
 {
     protected $table = 'stock_code';
-    protected $fillable = ['ID','CODE','DESCRIPTION'];
+    protected $fillable = ['ID','CODE','DESCRIPTION','PRICE'];
 }

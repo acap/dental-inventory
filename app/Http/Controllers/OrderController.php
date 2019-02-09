@@ -91,13 +91,11 @@ class OrderController extends Controller
     function detail($orderNo)
     {
         info("order no : " . $orderNo);
-
-        $stockCodes = StockCode::all();
         $order = DentalOrder::where('ORDER_NO', "=", $orderNo)
             ->first();
-
         $orderItems = OrderItem::where('ORDER_ID', "=", $order->ID)
             ->get();
+        $stockCodes = StockCode::all();
 
         return view("orders.detail")
             ->with("order", $order)
