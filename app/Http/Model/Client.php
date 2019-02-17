@@ -13,5 +13,6 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     protected $table = 'DI_CLIENT';
+    protected $primaryKey = 'ID';
     protected $fillable = ['ID','NAME','IC_NO','ADDRESS','PHONE_NO'];
 }

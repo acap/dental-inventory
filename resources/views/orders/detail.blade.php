@@ -93,6 +93,15 @@
                         </div>
                     </div>
                 </div>
+
+                <div class="row ">
+                    <div class="col-md-12">
+                        <button class="au-btn au-btn-icon au-btn--blue" onclick="completeOrder('{{$order->ORDER_NO}}')">
+                            Complete Order
+                        </button>
+                    </div>
+                </div>
+
             </div>
         </div>
     </div>
@@ -148,6 +157,10 @@
 
         function editOrder(orderNo) {
             window.location.assign('{{url('orders/edit')}}/' + orderNo);
+        }
+
+        function completeOrder(orderNo) {
+            window.location.assign('{{url('orders/complete')}}/' + orderNo);
         }
 
         function printOrder(orderNo) {

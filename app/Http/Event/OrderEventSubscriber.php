@@ -2,6 +2,10 @@
 
 namespace App\Http\Event;
 
+use App\Http\Model\Order;
+use App\Http\Model\OrderItem;
+use App\Http\Model\StockEntry;
+
 class OrderEventSubscriber
 {
     /**
@@ -9,7 +13,7 @@ class OrderEventSubscriber
      */
     public function eventCreated($event)
     {
-        info("Order created: " . $event->order->ORDER_NO);
+        info("OrderEventSubscriber: Order created: " . $event->order->ORDER_NO);
     }
 
     /**
@@ -17,22 +21,32 @@ class OrderEventSubscriber
      */
     public function eventCompleted($event)
     {
-        info("Order completed: " . $event->order->ORDER_NO);
+        info("Order x completed: " . $event->order->ORDER_NO);
+        $order = Order::where("ORDER_NO", $event->order->ORDER_NO)
+            ->first();
+        $orderItems = OrderItem::where('ORDER_ID', "=", $order->ID)
+            ->get();
+        info("Items: " . $orderItems->count());
+        foreach ($orderItems as $item) {
+            StockEntry::create([
+                'QUANTITY' => (-1 * $item->QUANTITY),
+                'STOCK_CODE_ID' => $item->STOCK_CODE_ID
+            ]);
+
+        }
     }
 
     /**
      * Register the listeners for the subscriber.
-     *
-     * @param  Illuminate\Events\Dispatcher $events
      */
     public function subscribe($events)
     {
         $events->listen(
-            'App\Http\Event\OrderEventCreated',
+            'App\Http\Event\OrderCreatedEvent',
             'App\Http\Event\OrderEventSubscriber@eventCreated'
         );
         $events->listen(
-            'App\Http\Event\OrderEventCompleted',
+            'App\Http\Event\OrderCompletedEvent',
             'App\Http\Event\OrderEventSubscriber@eventCompleted'
         );
     }

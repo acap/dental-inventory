@@ -14,5 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 class StockCode extends Model
 {
     protected $table = 'DI_STOCK_CODE';
+    protected $primaryKey = 'ID';
     protected $fillable = ['ID', 'CODE', 'DESCRIPTION', 'PRICE'];
 }

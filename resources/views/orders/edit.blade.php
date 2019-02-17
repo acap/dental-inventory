@@ -23,20 +23,22 @@
                                                aria-required="true" aria-invalid="false">
                                     </div>
                                     <div class="form-group">
-                                        <label for="name" class="control-label mb-1">Name</label>
-                                        <input id="name" name="name" type="text"
-                                               value="{{$order->NAME}}"
+                                        <label for="description" class="control-label mb-1">Order No</label>
+                                        <input id="description" name="description" type="text"
+                                               value="{{$order->DESCRIPTION}}"
                                                class="form-control"
                                                aria-required="true" aria-invalid="false">
                                     </div>
                                     <div class="form-group">
-                                        <label for="total_amount" class="control-label mb-1">Total Amount</label>
-                                        <input id="total_amount" name="total_amount" type="text"
-                                               value="{{$order->TOTAL_AMOUNT}}"
-                                               class="form-control"
-                                               aria-required="true" aria-invalid="false">
+                                        <label for="client_id" class=" form-control-label">Select Client</label>
+                                        <select name="client_id" id="client_id"
+                                                class="form-control-lg form-control">
+                                            <option value="0">Please select</option>
+                                            @foreach($clients as $client)
+                                                <option value="{{$client->ID}}">{{$client->IC_NO}} - {{$client->NAME}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
-
                                     <div class="form-group">
                                         <label for="date_delivery" class="control-label mb-1">Date delivery</label>
                                         <input id="date_delivery" name="date_delivery" class="form-control cc-exp"

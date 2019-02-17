@@ -11,6 +11,7 @@ use App\Http\Model\OrderItem;
 use App\Http\Model\StockCode;
 use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Support\Facades\Session;
 use Konekt\PdfInvoice\InvoicePrinter;
 
 
@@ -53,38 +54,62 @@ class OrderController extends Controller
         return redirect("orders/list");
     }
 
+    function complete($orderNo)
+    {
+        info("completing order no : " . $orderNo);
+
+        try {
+            DB::connection()->beginTransaction();
+
+            $order = Order::where('ORDER_NO', "=", $orderNo)
+                ->first();
+            $order->update([
+                'STATUS' => 3
+            ]);
+            event(new OrderCompletedEvent($order));
+
+            DB::connection()->commit();
+        } catch (\Exception $e) {
+            DB::connection()->rollBack();
+            Session::flash("error", "Error occurred");
+            return redirect("errors/");
+        }
+
+        Session::flash("success", "Order " .$orderNo . " is completed");
+
+        return redirect("orders/list");
+    }
+
     function edit($orderNo)
     {
         info("order no : " . $orderNo);
+        $clients = Client::all();
         $order = Order::where('ORDER_NO', "=", $orderNo)
             ->first();
 
         return view("orders.edit")
-            ->with("order", $order);
+            ->with("order", $order)
+            ->with("clients", $clients);
     }
 
     function post_edit()
     {
         $orderNo = $_POST['order_no'];
-        $name = $_POST['name'];
-        $totalAmount = $_POST['total_amount'];
         $status = $_POST['status'];
-//        $description = $_POST['description'];
+        $description = $_POST['description'];
 //        $dateDelivery = $_POST['date_delivery'];
 
-        info($orderNo);
-        info($name);
-        info($totalAmount);
+        info("orderNo: " . $orderNo);
+        info("status: " . $status);
 //        info($dateDelivery);
 
         try {
             DB::connection()->beginTransaction();
 
-            $order = Order::where("ORDER_NO", "=", $orderNo);
+            $order = Order::where("ORDER_NO", "=", $orderNo)
+                ->first();
             $order->update([
-                'NAME' => $name,
-                'TOTAL_AMOUNT' => $totalAmount,
-                'DESCRIPTION' => 'asdasd',
+                'DESCRIPTION' => $description,
                 'DATE_DELIVERY' => Carbon::createFromFormat('d/m/Y', '11/06/1990'),
                 'STATUS' => $status
             ]);

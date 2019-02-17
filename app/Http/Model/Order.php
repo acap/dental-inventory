@@ -15,6 +15,7 @@ use Illuminate\Support\Facades\DB;
 class Order extends Model
 {
     protected $table = 'DI_ORDER';
+    protected $primaryKey = 'ID';
     protected $fillable = ['ID', 'CLIENT_ID', 'ORDER_NO', 'TOTAL_AMOUNT', 'DESCRIPTION', 'DATE_DELIVERY', 'STATUS'];
 
     public function client()

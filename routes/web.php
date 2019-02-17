@@ -25,6 +25,7 @@ Route::post('/orders/post_edit', 'OrderController@post_edit');
 Route::get('/orders/detail/{orderNo}', 'OrderController@detail');
 Route::get('/orders/print/{orderNo}', 'OrderController@print');
 Route::post('/orders/post_add_item/{orderNo}', 'OrderController@post_add_item');
+Route::get('/orders/complete/{orderNo}', 'OrderController@complete');
 
 Route::get('/stocks/list', 'StockController@list');
 Route::get('/stocks/add', 'StockController@add');
