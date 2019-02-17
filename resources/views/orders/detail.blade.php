@@ -21,6 +21,9 @@
                         <button class="au-btn au-btn-icon au-btn--blue" onclick="addOrder()">
                             <i class="zmdi zmdi-plus"></i>add order
                         </button>
+                        <button class="au-btn au-btn-icon au-btn--blue" onclick="printOrder('{{$order->ORDER_NO}}')">
+                            <i class="zmdi zmdi-plus"></i>print order
+                        </button>
                     </div>
                 </div>
 
@@ -31,14 +34,14 @@
                             <div class="card-body">
                                 <div class="row">
                                     <div class="col-md-3">Name</div>
-                                    <div class="col-md-9">{{$order->NAME}}</div>
+                                    <div class="col-md-9">{{$order->client->NAME}}</div>
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">Description</div>
                                     <div class="col-md-9">{{$order->DESCRIPTION}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">Description</div>
+                                    <div class="col-md-3">Total Amount</div>
                                     <div class="col-md-9">{{$order->TOTAL_AMOUNT}}</div>
                                 </div>
                                 <div class="row">
@@ -74,13 +77,15 @@
                                 <tr>
                                     <th>Stock Code</th>
                                     <th>Quantity</th>
+                                    <th>Amount</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($orderItems as $orderItem)
                                     <tr>
-                                        <td>{{$orderItem->STOCK_CODE_ID}}</td>
+                                        <td>{{$orderItem->stockCode->CODE}} - {{$orderItem->stockCode->DESCRIPTION}}</td>
                                         <td>{{$orderItem->QUANTITY}}</td>
+                                        <td>{{$orderItem->AMOUNT}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>
@@ -145,7 +150,8 @@
             window.location.assign('{{url('orders/edit')}}/' + orderNo);
         }
 
-        function addOrderItem(orderNo) {
+        function printOrder(orderNo) {
+            window.location.assign('{{url('orders/print')}}/' + orderNo);
         }
     </script>
 

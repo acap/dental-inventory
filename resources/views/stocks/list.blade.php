@@ -22,17 +22,17 @@
                             <table class="table table-borderless table-striped table-earning">
                                 <thead>
                                 <tr>
-                                    <th>ID</th>
                                     <th>Stock</th>
                                     <th>Quantity</th>
+                                    <th>Per Unit</th>
                                 </tr>
                                 </thead>
                                 <tbody>
                                 @foreach($stockList as $stock)
                                     <tr>
-                                        <td>{{$stock -> ID}}</td>
-                                        <td>{{$stock -> STOCK_CODE_ID}}</td>
-                                        <td>{{$stock -> QUANTITY}}</td>
+                                        <td>{{$stock->stockCode->CODE}} - {{$stock->stockCode->DESCRIPTION}} </td>
+                                        <td>{{$stock->QUANTITY}}</td>
+                                        <td>{{$stock->stockCode->PRICE}}</td>
                                     </tr>
                                 @endforeach
                                 </tbody>

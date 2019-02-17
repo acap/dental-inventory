@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Model\Stock;
+use App\Http\Model\StockEntry;
 use App\Http\Model\StockCode;
 use Illuminate\Http\Request;
 
@@ -28,7 +29,7 @@ class StockController extends Controller
         $stockCodeId = $_POST['stock_code_id'];
         info($quantity);
         info($stockCodeId);
-        Stock::create([
+        StockEntry::create([
             'QUANTITY'=> $quantity,
             'STOCK_CODE_ID'=>$stockCodeId
         ]);

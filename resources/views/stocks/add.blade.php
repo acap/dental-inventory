@@ -21,7 +21,7 @@
                                                 class="form-control-lg form-control">
                                             <option value="0">Please select</option>
                                             @foreach($stockCodes as $stockCode)
-                                                <option value="{{$stockCode->ID}}">{{$stockCode->CODE}}-{{$stockCode->DESCRIPTION}}</option>
+                                                <option value="{{$stockCode->ID}}">{{$stockCode->CODE}} - {{$stockCode->DESCRIPTION}}</option>
                                             @endforeach
                                         </select>
                                     </div>

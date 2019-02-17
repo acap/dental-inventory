@@ -11,8 +11,8 @@ namespace App\Http\Model;
 
 use Illuminate\Database\Eloquent\Model;
 
-class StockCode extends Model
+class StockEntry extends Model
 {
-    protected $table = 'DI_STOCK_CODE';
-    protected $fillable = ['ID', 'CODE', 'DESCRIPTION', 'PRICE'];
+    protected $table = 'DI_STOCK_ENTRY';
+    protected $fillable = ['ID','STOCK_CODE_ID','QUANTITY'];
 }

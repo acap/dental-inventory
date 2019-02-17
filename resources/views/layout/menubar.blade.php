@@ -28,6 +28,10 @@
                     <a href="{{url('/clients/list')}}">
                         <i class="fas fa-table"></i>Client</a>
                 </li>
+                <li>
+                    <a href="{{url('/calendars/calendar')}}">
+                        <i class="fas fa-table"></i>Calendar</a>
+                </li>
 
             </ul>
         </nav>

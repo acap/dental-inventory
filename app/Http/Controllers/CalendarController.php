@@ -4,7 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Controllers\Controller;
 use App\Http\Model\Client;
-use App\Http\Model\DentalOrder;
+use App\Http\Model\Order;
 use App\Http\Model\OrderItem;
 use App\Http\Model\StockCode;
 use Illuminate\Support\Carbon;

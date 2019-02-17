@@ -12,9 +12,6 @@ use Illuminate\Database\Eloquent\Model;
 
 class Client extends Model
 {
-
-    protected $table = 'client';
+    protected $table = 'DI_CLIENT';
     protected $fillable = ['ID','NAME','IC_NO','ADDRESS','PHONE_NO'];
-
-
 }
