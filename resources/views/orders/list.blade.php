@@ -42,7 +42,7 @@
                                             {{$order->ORDER_NO}}
                                         </td>
                                         <td>
-                                            {{$order->NAME}}
+                                            {{$order->client->NAME}}
                                         </td>
                                         <td>
                                             {{$order->TOTAL_AMOUNT}}
