@@ -10,12 +10,15 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Model\Client;
+use App\Http\Model\StateCode;
 
 class ClientController extends Controller
 {
     function add()
     {
-        return view('clients/add');
+        $stateCodes = StateCode:: all();
+        return view('clients/add')
+            ->with("xxx", $stateCodes);
     }
 
     function post_add()
@@ -24,12 +27,14 @@ class ClientController extends Controller
         $ic_no = $_POST['ic_no'];
         $address = $_POST['address'];
         $phone_no = $_POST['phone_no'];
+        $state_code_id = $_POST['state_code_id'];
 
         Client::create([
             'NAME' => $name,
             'IC_NO' => $ic_no,
             'ADDRESS' => $address,
             'PHONE_NO' => $phone_no,
+            'STATE_CODE_ID' => $state_code_id
         ]);
 
         return redirect('clients/list');
@@ -48,5 +53,9 @@ class ClientController extends Controller
         $detail = Client::where('IC_NO', "=", $icNo)->first();
         return view("clients.detail")
             ->with('client', $detail);
+    }
+
+    function StateCode()
+    {
     }
 }

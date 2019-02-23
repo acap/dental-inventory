@@ -17,6 +17,7 @@ class Order extends Model
     protected $table = 'DI_ORDER';
     protected $fillable = ['ID', 'CLIENT_ID', 'ORDER_NO', 'TOTAL_AMOUNT', 'DESCRIPTION', 'DATE_DELIVERY', 'STATUS'];
 
+    //this is eloquent relationship-> dia buat
     public function client()
     {
         return $this->belongsTo('App\Http\Model\Client', 'CLIENT_ID', 'ID');

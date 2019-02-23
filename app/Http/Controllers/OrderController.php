@@ -20,6 +20,7 @@ class OrderController extends Controller
     function list()
     {
         //this is eloquent see the db statement
+        // Order is model dia ambk smue
         $orders = Order::all();
         return view("orders.list")->with('result', $orders);
     }

@@ -15,9 +15,9 @@ class StockCodeController extends Controller
 {
     function list()
     {
-        // STOCKCODE NIE ADALAH MODAL YANG MANA DIA AMBK SMUE DATA DARI DB MGGUNAKAN MODAL
-        //RETURN NI LAK DIA CKP KEMBALIKN VIEW PAGE STOCKCODE LIST
-        // WITH NIE ADALAH FUNCTION 
+        // STOCKCODE NIE ADALAH MODAL YANG MANA DIA AMBK SMUE DATA DARI DB MGGUNAKAN MODAL sebagai penantaraan
+        //RETURN NI LAK DIA CKP KEMBALIKN VIEW PAGE STOCKCODE LIST kat blade
+        // WITH NIE ADALAH FUNCTION yang bawak apa kita nak
         $stockCodeList = StockCode::all();
         return view("stockCodes.list")
             ->with('stockCodeList', $stockCodeList);
@@ -71,5 +71,14 @@ class StockCodeController extends Controller
         ]);
 
         return redirect('stockCodes/list');
+    }
+
+    function destory($code)
+    {
+      $stockCode::find($code);
+      $stockCode -> delete();
+
+      return redirect('stockCodes/list');
+
     }
 }

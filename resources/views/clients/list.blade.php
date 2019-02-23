@@ -24,10 +24,13 @@
                                     <th>NAME</th>
                                     <th>IC NUMBER</th>
                                     <th>PHONE NO</th>
+                                    <th>STATE</th>
                                 </tr>
                                 </thead>
 
                                 {{--this is looping the data and why we use loop to make the data come out--}}
+                                {{--this table able to click on the row using  --}}
+                                {{--guna relationship untuk other table and table  --}}
                                 @foreach ($clientList as $client)
                                     <tr class='clickable-row' data-href='{{url('/clients/detail/' .$client->IC_NO)}}'>
                                         <td>
@@ -38,6 +41,9 @@
                                         </td>
                                         <td>
                                             {{$client->PHONE_NO}}
+                                        </td>
+                                        <td>
+                                            {{$client ->stateCode ->NAME }}
                                         </td>
                                     </tr>
                                 @endforeach

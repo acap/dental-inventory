@@ -35,6 +35,16 @@
                                         <input id="phone_no" name="phone_no" type="text" class="form-control"
                                                aria-required="true" aria-invalid="false">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="state_code_id" class=" form-control-label">Select State</label>
+                                        <select name="state_code_id" id="state_code_id"
+                                                class="form-control-lg form-control">
+                                            <option value="0">Please select</option>
+                                            @foreach($xxx as $stateCode)
+                                                <option value="{{$stateCode->ID}}">{{$stateCode->CODE}} - {{$stateCode->NAME}}</option>
+                                            @endforeach
+                                        </select>
+                                    </div>
 
                                     <div>
                                         <button id="payment-button" type="submit" class="btn btn-lg btn-info btn-block">

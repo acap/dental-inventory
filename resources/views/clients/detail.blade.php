@@ -32,12 +32,16 @@
                                     <div class="col-md-9">{{$client->NAME}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">Description</div>
+                                    <div class="col-md-3">Phone Number</div>
                                     <div class="col-md-9">{{$client->PHONE_NO}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">Description</div>
+                                    <div class="col-md-3">Address</div>
                                     <div class="col-md-9">{{$client->ADDRESS}}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">STATE CODE</div>
+                                    <div class="col-md-9">{{$client->stateCode->name}}</div>
                                 </div>
                             </div>
                         </div>
