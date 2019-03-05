@@ -25,6 +25,7 @@ Route::post('/orders/post_edit', 'OrderController@post_edit');
 Route::get('/orders/detail/{orderNo}', 'OrderController@detail');
 Route::get('/orders/print/{orderNo}', 'OrderController@print');
 Route::post('/orders/post_add_item/{orderNo}', 'OrderController@post_add_item');
+Route::get('/orders/complete/{orderNo}', 'OrderController@complete');
 
 Route::get('/stocks/list', 'StockController@list');
 Route::get('/stocks/add', 'StockController@add');
@@ -42,6 +43,12 @@ Route::get('/clients/list', 'ClientController@list');
 Route::get('/clients/detail/{ic_no}', 'ClientController@detail');
 
 Route::get('/calendars/calendar', 'CalendarController@calendar');
+
+Route::get('/ownerConfigurations/add', 'ConfigurationController@add');
+Route::post('/ownerConfigurations/post_add', 'ConfigurationController@post_add');
+Route::get('/ownerConfigurations/detail', 'ConfigurationController@detail');
+Route::get('/ownerConfigurations/edit', 'ConfigurationController@edit');
+Route::post('/ownerConfigurations/post_edit', 'ConfigurationController@post_edit');
 
 
 
