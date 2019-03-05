@@ -15,7 +15,8 @@ use Illuminate\Support\Facades\DB;
 class Order extends Model
 {
     protected $table = 'DI_ORDER';
-    protected $fillable = ['ID', 'CLIENT_ID', 'ORDER_NO', 'TOTAL_AMOUNT', 'DESCRIPTION', 'DATE_DELIVERY', 'STATUS'];
+    protected $primaryKey = 'ID';
+    protected $fillable = ['ID', 'CLIENT_ID', 'ORDER_NO', 'TOTAL_AMOUNT','DEPOSIT', 'DESCRIPTION', 'DATE_DELIVERY', 'STATUS'];
 
     //this is eloquent relationship-> dia buat
     public function client()

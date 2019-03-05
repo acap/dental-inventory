@@ -14,6 +14,7 @@ use Illuminate\Support\Facades\DB;
 
 class OrderItem extends Model {
     protected $table = 'DI_ORDER_ITEM';
+    protected $primaryKey = 'ID';
     protected $fillable = ['ID', 'ORDER_ID', 'STOCK_CODE_ID','QUANTITY', 'AMOUNT'];
 
     public function stockCode()

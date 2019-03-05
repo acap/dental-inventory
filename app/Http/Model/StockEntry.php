@@ -14,5 +14,6 @@ use Illuminate\Database\Eloquent\Model;
 class StockEntry extends Model
 {
     protected $table = 'DI_STOCK_ENTRY';
+    protected $primaryKey = 'ID';
     protected $fillable = ['ID','STOCK_CODE_ID','QUANTITY'];
 }

@@ -13,9 +13,10 @@ use Illuminate\Database\Eloquent\Model;
 class Client extends Model
 {
     protected $table = 'DI_CLIENT';
-    protected $fillable = ['ID','STATE_CODE_ID','NAME','IC_NO','ADDRESS','PHONE_NO'];
+    protected $primaryKey = 'ID';
+    protected $fillable = ['ID','STATE_CODE_ID','NAME','IC_NO','ADDRESS1','ADDRESS2','ADDRESS3','POSTCODE','PHONE_NO'];
 
-
+    //relationship
     public function stateCode()
     {
         return $this->belongsTo('App\Http\Model\StateCode', 'STATE_CODE_ID', 'ID');
