@@ -25,14 +25,20 @@ class ClientController extends Controller
     {
         $name = $_POST['name'];
         $ic_no = $_POST['ic_no'];
-        $address = $_POST['address'];
+        $address1 = $_POST['address1'];
+        $address2 = $_POST['address2'];
+        $address3 = $_POST['address3'];
+        $postcode = $_POST['postcode'];
         $phone_no = $_POST['phone_no'];
         $state_code_id = $_POST['state_code_id'];
 
         Client::create([
             'NAME' => $name,
             'IC_NO' => $ic_no,
-            'ADDRESS' => $address,
+            'ADDRESS1' => $address1,
+            'ADDRESS2' => $address2,
+            'ADDRESS3' => $address3,
+            'POSTCODE' => $postcode,
             'PHONE_NO' => $phone_no,
             'STATE_CODE_ID' => $state_code_id
         ]);
@@ -55,7 +61,4 @@ class ClientController extends Controller
             ->with('client', $detail);
     }
 
-    function StateCode()
-    {
-    }
 }
