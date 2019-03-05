@@ -7,6 +7,17 @@
         <div class="section__content section__content--p30">
             <div class="container-fluid">
 
+                @if (session('success'))
+                    <div id="success" class="alert alert-primary" role="alert">
+                        {{ session('success') }}
+                    </div>
+                @endif
+                @if (session('error'))
+                    <div id="error" class="alert alert-danger" role="alert">
+                        {{ session('error') }}
+                    </div>
+                @endif
+
                 {{--this is the button on the header at order list page--}}
                 <div class="row">
                     <div class="col-md-12">
@@ -42,7 +53,7 @@
                                             {{$order->ORDER_NO}}
                                         </td>
                                         <td>
-                                            {{$order->NAME}}
+                                            {{$order->client->NAME}}
                                         </td>
                                         <td>
                                             {{$order->TOTAL_AMOUNT}}
@@ -75,6 +86,9 @@
         function addOrder() {
             window.location.assign('{{url('/orders/add')}}');
         }
+
+        $('#success').delay(1000).fadeOut('fast');
+
     </script>
 @endsection
 

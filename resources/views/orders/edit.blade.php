@@ -13,7 +13,7 @@
                                     <h3 class="text-center title-2">Edit Order</h3>
                                 </div>
                                 <hr>
-                                <form action="../post_edit" method="post" novalidate="novalidate">
+                                <form action="{{url('orders/post_edit')}}" method="post" novalidate="novalidate">
                                     @csrf
                                     <div class="form-group">
                                         <label for="order_no" class="control-label mb-1">Order No</label>
@@ -23,27 +23,43 @@
                                                aria-required="true" aria-invalid="false">
                                     </div>
                                     <div class="form-group">
-                                        <label for="name" class="control-label mb-1">Name</label>
-                                        <input id="name" name="name" type="text"
-                                               value="{{$order->NAME}}"
+                                        <label for="description" class="control-label mb-1">Description</label>
+                                        <input id="description" name="description" type="text"
+                                               value="{{$order->DESCRIPTION}}"
                                                class="form-control"
                                                aria-required="true" aria-invalid="false">
                                     </div>
                                     <div class="form-group">
-                                        <label for="total_amount" class="control-label mb-1">Total Amount</label>
-                                        <input id="total_amount" name="total_amount" type="text"
-                                               value="{{$order->TOTAL_AMOUNT}}"
+                                        <label for="deposit" class="control-label mb-1">Deposit</label>
+                                        <input id="deposit" name="deposit" type="number"
+                                               value="{{$order->DEPOSIT}}"
                                                class="form-control"
                                                aria-required="true" aria-invalid="false">
                                     </div>
+                                    <div class="form-group">
+                                        <label for="client_id" class=" form-control-label">Name</label>
+                                        <select name="client_id" id="client_id"
+                                                class="form-control-lg form-control">
+                                            <option value="0">Please select</option>
+                                            @foreach($clients as $client)
+                                                @if($client->ID == $order->client->ID)
+                                                    <option selected value="{{$client->ID}}">{{$client->IC_NO}} - {{$client->NAME}}</option>
+                                                @else
+                                                    <option value="{{$client->ID}}">{{$client->IC_NO}} - {{$client->NAME}}</option>
+                                                @endif
+                                            @endforeach
+                                        </select>
 
+                                    </div>
                                     <div class="form-group">
                                         <label for="date_delivery" class="control-label mb-1">Date delivery</label>
-                                        <input id="date_delivery" name="date_delivery" class="form-control cc-exp"
+                                        <input id="date_delivery_datepicker" name="date_delivery"
+                                               class="form-control cc-exp"
                                                value="{{$order->DATE_DELIVERY}}"
                                                data-val="true"
                                                placeholder="DD/MM/YY">
                                     </div>
+
                                     <div class="form-group">
                                         <label for="status" class=" form-control-label">Select Status</label>
                                         <select name="status" id="status"
@@ -68,4 +84,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('main-script')
+    <script>
+        $(function () {
+            $("#date_delivery_datepicker").datepicker({format: 'mm/dd/yy'});
+        });
+    </script>
 @endsection

@@ -26,13 +26,14 @@
                                                 class="form-control-lg form-control">
                                             <option value="0">Please select</option>
                                             @foreach($clients as $client)
-                                                <option value="{{$client->ID}}">{{$client->IC_NO}} - {{$client->NAME}}</option>
+                                                <option value="{{$client->ID}}">{{$client->IC_NO}}
+                                                    - {{$client->NAME}}</option>
                                             @endforeach
                                         </select>
                                     </div>
                                     <div class="form-group">
                                         <label for="date_delivery" class="control-label mb-1">Date delivery</label>
-                                        <input id="date_delivery" name="date_delivery" class="form-control cc-exp"
+                                        <input id="date_delivery_datepicker" name="date_delivery" class="form-control cc-exp"
                                                value="" data-val="true"
                                                placeholder="DD/MM/YY">
                                     </div>
@@ -49,4 +50,12 @@
             </div>
         </div>
     </div>
+@endsection
+
+@section('main-script')
+    <script>
+        $(function () {
+            $("#date_delivery_datepicker").datepicker({ format: 'mm/dd/yy'});
+        });
+    </script>
 @endsection

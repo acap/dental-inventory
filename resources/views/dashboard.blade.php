@@ -30,7 +30,7 @@
                                         <div class="icon">
                                             <i class="zmdi zmdi-account-o"></i>
                                         </div>
-                                        <div class="text">
+                                        <div class="text" onclick="$dash">
                                             <h2>{{$dash['count']}}</h2>
                                             <span>{{$dash['title']}}</span>
                                         </div>

@@ -1,6 +1,5 @@
 @extends('layout.main_layout')
 
-
 @section('main-content')
     <div class="main-content">
         <div class="section__content section__content--p30">

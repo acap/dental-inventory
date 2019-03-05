@@ -32,6 +32,10 @@
                     <a href="{{url('/calendars/calendar')}}">
                         <i class="fas fa-table"></i>Calendar</a>
                 </li>
+                <li>
+                    <a href="{{url('/ownerConfigurations/detail')}}">
+                        <i class="fas fa-table"></i>Config</a>
+                </li>
 
             </ul>
         </nav>

@@ -27,9 +27,17 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="address" class="control-label mb-1">ADDRESS</label>
-                                        <input id="address" name="address" type="text" class="form-control"
+                                        <input id="address1" name="address1" type="text" class="form-control"
+                                               aria-required="true" aria-invalid="false">
+                                        <input id="address2" name="address2" type="text" class="form-control"
+                                               aria-required="true" aria-invalid="false">
+                                        <input id="address3" name="address3" type="text" class="form-control"
                                                aria-required="true" aria-invalid="false">
                                     </div>
+                                        <div class="form-grop">
+                                           <label for="postcode" class="contol-label mb-1">POSTCODE</label>
+                                            <input id="postcode" name="postcode" type="text" class="form-control">
+                                        </div>
                                     <div class="form-group">
                                         <label for="phone_no" class="control-label mb-1">PHONE NUMBER</label>
                                         <input id="phone_no" name="phone_no" type="text" class="form-control"

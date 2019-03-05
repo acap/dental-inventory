@@ -37,11 +37,19 @@
                                 </div>
                                 <div class="row">
                                     <div class="col-md-3">Address</div>
-                                    <div class="col-md-9">{{$client->ADDRESS}}</div>
+                                    <div class="col-md-9">{{$client->ADDRESS1}}</div>
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-9">{{$client->ADDRESS2}}</div>
+                                    <div class="col-md-3"></div>
+                                    <div class="col-md-9">{{$client->ADDRESS3}}</div>
                                 </div>
                                 <div class="row">
-                                    <div class="col-md-3">STATE CODE</div>
-                                    <div class="col-md-9">{{$client->stateCode->name}}</div>
+                                    <div class="col-md-3">Postcode</div>
+                                    <div class="col-md-3">{{$client ->POSTCODE }}</div>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-3">State Code</div>
+                                    <div class="col-md-9">{{$client->stateCode->NAME}}</div>
                                 </div>
                             </div>
                         </div>
