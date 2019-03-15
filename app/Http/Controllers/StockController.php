@@ -7,6 +7,8 @@ use App\Http\Model\Stock;
 use App\Http\Model\StockEntry;
 use App\Http\Model\StockCode;
 use Illuminate\Http\Request;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
 
 class StockController extends Controller
 {
@@ -37,4 +39,26 @@ class StockController extends Controller
         return redirect('stocks/list');
     }
 
+    function download(){
+        info('downloading');
+        // create excel
+        $spreadsheet = new Spreadsheet();
+        $xls = new Xls($spreadsheet);
+        $spreadsheet->setActiveSheetIndex(0);
+        $activeSheet = $spreadsheet->getActiveSheet();
+
+        // take all the information and
+        $stocks = Stock::all();
+        foreach ($stocks as $a=>$stock){
+            $activeSheet->setCellValue('A' .($a+1) , $stock->stockCode->CODE);
+            $activeSheet->setCellValue('B' .($a+1) , $stock->QUANTITY);
+        }
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="stock_list.xls"');
+        header('Cache-Control: max-age=0');
+        $xls->save('php://output');
+
+        return redirect('stocks/list');
+    }
 }
