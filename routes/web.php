@@ -30,6 +30,7 @@ Route::get('/orders/complete/{orderNo}', 'OrderController@complete');
 Route::get('/stocks/list', 'StockController@list');
 Route::get('/stocks/add', 'StockController@add');
 Route::post('/stocks/post_add', 'StockController@post_add');
+Route::get('/stocks/download', 'StockController@download');
 
 Route::get('/stockCodes/list', 'StockCodeController@list');
 Route::get('/stockCodes/add', 'StockCodeController@add');
@@ -41,6 +42,7 @@ Route::get('/clients/add','ClientController@add');
 Route::post('/clients/post_add', 'ClientController@post_add');
 Route::get('/clients/list', 'ClientController@list');
 Route::get('/clients/detail/{ic_no}', 'ClientController@detail');
+Route::get('/clients/download', 'ClientController@download');
 
 Route::get('/calendars/calendar', 'CalendarController@calendar');
 
