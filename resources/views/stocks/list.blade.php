@@ -12,6 +12,9 @@
                             <button class="au-btn au-btn-icon au-btn--blue" onclick="addStock()">
                                 <i class="zmdi zmdi-plus"></i>add stock
                             </button>
+                            <button class="au-btn au-btn-icon au-btn--blue" onclick="downloadStock()">
+                                <i class="zmdi zmdi-plus"></i>Download report
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -50,6 +53,10 @@
     <script>
         function addStock() {
             window.location.assign('{{url('/stocks/add')}}');
+        }
+
+        function downloadStock() {
+            window.location.assign('{{url('/stocks/download')}}');
         }
     </script>
 @endsection
