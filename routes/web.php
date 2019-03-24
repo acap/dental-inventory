@@ -26,6 +26,7 @@ Route::get('/orders/detail/{orderNo}', 'OrderController@detail');
 Route::get('/orders/print/{orderNo}', 'OrderController@print');
 Route::post('/orders/post_add_item/{orderNo}', 'OrderController@post_add_item');
 Route::get('/orders/complete/{orderNo}', 'OrderController@complete');
+Route::get('/orders/download', 'OrderController@download');
 
 Route::get('/stocks/list', 'StockController@list');
 Route::get('/stocks/add', 'StockController@add');
@@ -52,7 +53,10 @@ Route::get('/ownerConfigurations/detail', 'ConfigurationController@detail');
 Route::get('/ownerConfigurations/edit', 'ConfigurationController@edit');
 Route::post('/ownerConfigurations/post_edit', 'ConfigurationController@post_edit');
 
-
+Route::get('/vendors/add','VendorController@add');
+Route::post('/vendors/post_add','VendorController@post_add');
+Route::get('/vendors/list','VendorController@list');
+Route::get('/vendors/detail/{ID}','VendorController@detail');
 
 Route::get('/login', function (){
     return view('login');
