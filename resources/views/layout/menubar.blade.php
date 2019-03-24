@@ -2,7 +2,7 @@
 <aside class="menu-sidebar d-none d-lg-block">
     <div class="logo">
         <a href="#">
-            <img src="{{asset('/images/icon/logo.png')}}" alt="Cool Admin"/>
+            <img src="{{asset('/images/icon/logo.png')}}" alt="HAHAHA"/>
         </a>
     </div>
     <div class="menu-sidebar__content js-scrollbar1">
@@ -35,6 +35,10 @@
                 <li>
                     <a href="{{url('/ownerConfigurations/detail')}}">
                         <i class="fas fa-table"></i>Config</a>
+                </li>
+                <li>
+                    <a href="{{url('/vendors/list')}}">
+                        <i class="fas fa-table"></i>Vendor</a>
                 </li>
 
             </ul>
