@@ -14,6 +14,8 @@ use Illuminate\Support\Carbon;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Session;
 use Konekt\PdfInvoice\InvoicePrinter;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xls;
 
 
 class OrderController extends Controller
@@ -36,16 +38,18 @@ class OrderController extends Controller
 
     function post_add()
     {
-        $orderNumber = $_POST['order_no'];
+
         $clientId = $_POST['client_id'];
-//        $description = $_POST['description'];
         $dateDelivery = $_POST['date_delivery'];
-        info($orderNumber);
-//        info($dateDelivery);
+
+        $max = Order::count('ID');
+        $next = (intval($max) ?: 0) + 1;
+        $generatedOrderNo = "ORD-{$next}";
+
 
         $order = Order::create([
             'CLIENT_ID' => $clientId,
-            'ORDER_NO' => $orderNumber,
+            'ORDER_NO' => $generatedOrderNo,
             'DESCRIPTION' => 'asdasd',
             'DATE_DELIVERY' => Carbon::createFromFormat('m/d/Y', $dateDelivery),
             'STATUS' => 1
@@ -104,13 +108,13 @@ class OrderController extends Controller
 
         info("orderNo: " . $orderNo);
         info("status: " . $status);
+        info("date: " . $dateDelivery);
 //        info($dateDelivery);
 
         try {
             DB::connection()->beginTransaction();
 
-            $order = Order::where("ORDER_NO", "=", $orderNo)
-                ->first();
+            $order = Order::where("ORDER_NO", "=", $orderNo)->first();
             $order->update([
                 'DESCRIPTION' => $description,
                 'DATE_DELIVERY' => Carbon::createFromFormat('d/m/Y', $dateDelivery),
@@ -172,7 +176,7 @@ class OrderController extends Controller
             OrderItem::create([
                 "ORDER_ID" => $order->ID,
                 "STOCK_CODE_ID" => $stockCodeId,
-                "QUANTITY" => $quantity * $stockCode->PRICE,
+                "QUANTITY" => $quantity,
                 "AMOUNT" => $quantity * $stockCode->PRICE
             ]);
 
@@ -218,7 +222,7 @@ class OrderController extends Controller
         $invoice->setTime(date('h:i:s A', time()));   //Billing Time
         $invoice->setDue(date('M dS ,Y', strtotime('+3 months')));    // Due Date
         $invoice->setFrom(array($businessName->VALUE_, $businessAddress1->VALUE_, $businessAddress2->VALUE_, $businessAddress3->VALUE_, $businessPostcode->VALUE_, $businessPhoneNo->VALUE_));
-        $invoice->setTo(array($order->client->NAME,$order->client->ADDRESS, "128 AA Juanita Ave", "Glendora , CA 91740"));
+        $invoice->setTo(array($order->client->NAME, $order->client->ADDRESS, "128 AA Juanita Ave", "Glendora , CA 91740"));
 
         foreach ($orderItems as $orderItem)
             $invoice->addItem($orderItem->stockCode->CODE, $orderItem->stockCode->DESCRIPTION, $orderItem->QUANTITY, 0, $orderItem->stockCode->PRICE, 0, $orderItem->AMOUNT);
@@ -233,5 +237,29 @@ class OrderController extends Controller
         $invoice->setFooternote("My Company Name Here");
         $output = fopen("php://output", "w");
         $invoice->render("Invoice-" . $orderNo . ".pdf", "D");
+    }
+
+    function download()
+    {
+        $spreadsheet = new Spreadsheet();  /*----Spreadsheet object-----*/
+        $Excel_writer = new Xls($spreadsheet);  /*----- Excel (Xls) Object*/
+        $spreadsheet->setActiveSheetIndex(0);
+        $activeSheet = $spreadsheet->getActiveSheet();
+
+        $orders=Order::all();
+        foreach ($orders as $a => $order){
+            $activeSheet->setCellValue('A'. ($a+1), $order->ORDER_NO);
+            $activeSheet->setCellValue('B'. ($a+1), $order->TOTAL_AMOUNT);
+            $activeSheet->setCellValue('C'. ($a+1), $order->DEPOSIT);
+            $activeSheet->setCellValue('D'. ($a+1), $order->DESCRIPTION);
+            $activeSheet->setCellValue('E'. ($a+1), $order->DATE_DELIVERY);
+            $activeSheet->setCellValue('F'. ($a+1), $order->STATUS);
+        }
+
+        header('Content-Type: application/vnd.ms-excel');
+        header('Content-Disposition: attachment;filename="' . 'order_list' . '.xls"'); /*-- $filename is  xsl filename ---*/
+        header('Cache-Control: max-age=0');
+        $Excel_writer->save('php://output');
+
     }
 }
