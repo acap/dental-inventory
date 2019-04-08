@@ -40,6 +40,10 @@
                     <a href="{{url('/vendors/list')}}">
                         <i class="fas fa-table"></i>Vendor</a>
                 </li>
+                <li>
+                    <a href="{{url('/deliveries/list')}}">
+                        <i class="fas fa-table"></i>Delivery Order</a>
+                </li>
 
             </ul>
         </nav>
