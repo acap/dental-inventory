@@ -15,5 +15,10 @@ class StockCode extends Model
 {
     protected $table = 'DI_STOCK_CODE';
     protected $primaryKey = 'ID';
-    protected $fillable = ['ID', 'CODE', 'DESCRIPTION', 'PRICE'];
+    protected $fillable = ['ID','VENDOR_ID','CODE','DESCRIPTION','PRICE', 'MOQ'];
+
+    public function vendor()
+    {
+        return $this->belongsTo('App\Http\Model\Vendor','VENDOR_ID','ID');
+    }
 }
