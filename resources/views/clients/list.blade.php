@@ -11,6 +11,9 @@
                             <button class="au-btn au-btn-icon au-btn--blue" onclick="addClient()">
                                 <i class="zmdi zmdi-plus"></i>add client
                             </button>
+                            <button class="au-btn au-btn-icon au-btn--blue" onclick="downloadClient()">
+                                <i class="zmdi zmdi-plus"></i>Download list client
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -42,7 +45,7 @@
                                             {{$client->PHONE_NO}}
                                         </td>
                                         <td>
-                                            {{$client ->stateCode ->NAME }}
+                                            {{$client ->stateCode-> NAME }}
                                         </td>
                                     </tr>
                                 @endforeach
@@ -66,6 +69,9 @@
 
         function addClient() {
             window.location.assign('{{url('/clients/add')}}');
+        }
+        function downloadClient() {
+            window.location.assign('{{url('/clients/download')}}');
         }
     </script>
 @endsection
