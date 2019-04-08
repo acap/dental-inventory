@@ -28,8 +28,24 @@
                                     </div>
                                     <div class="form-group">
                                         <label for="price" class="control-label mb-1">Pricing</label>
-                                        <input id="price" name="price" type="text" class="form-control"
+                                        <input id="price" name="price" type="number" class="form-control"
                                                aria-required="true" aria-invalid="false">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="moq" class="control-label mb-1">MOQ</label>
+                                        <input id="moq" name="moq" type="number" class="form-control"
+                                               aria-required="true" aria-invalid="false">
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="vendor_id" class=" form-control-label">Select Vendor</label>
+                                        <select name="vendor_id" id="vendor_id"
+                                                class="form-control-lg form-control">
+                                            <option value="0">Please select</option>
+                                            @foreach($vendors as $vendor)
+                                                <option value="{{$vendor->ID}}">{{$vendor->CODE}}
+                                                    - {{$vendor->COMPANY_NAME}}</option>
+                                            @endforeach
+                                        </select>
                                     </div>
 
                                     <div>
