@@ -10,6 +10,7 @@ namespace App\Http\Controllers;
 
 
 use App\Http\Model\StockCode;
+use App\Http\Model\Vendor;
 
 class StockCodeController extends Controller
 {
@@ -25,7 +26,9 @@ class StockCodeController extends Controller
 
     function add()
     {
-        return view('stockCodes/add');
+        $vendors = Vendor::all();
+        return view('stockCodes/add')
+            ->with("vendors", $vendors);
     }
 
     function post_add()
@@ -33,11 +36,15 @@ class StockCodeController extends Controller
         $code = $_POST['code'];
         $description = $_POST['description'];
         $price = $_POST['price'];
+        $moq = $_POST['moq'];
+        $vendorId = $_POST['vendor_id'];
 
         StockCode::create([
             'CODE'=> $code,
             'DESCRIPTION'=>$description,
-            'PRICE'=>$price
+            'PRICE'=>$price,
+            'MOQ'=>$moq,
+            'VENDOR_ID'=>$vendorId
         ]);
 
         return redirect('stockCodes/list');
@@ -73,12 +80,4 @@ class StockCodeController extends Controller
         return redirect('stockCodes/list');
     }
 
-    function destory($code)
-    {
-      $stockCode::find($code);
-      $stockCode -> delete();
-
-      return redirect('stockCodes/list');
-
-    }
 }
