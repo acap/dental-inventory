@@ -15,6 +15,9 @@
                             <button class="au-btn au-btn-icon au-btn--blue" onclick="downloadStock()">
                                 <i class="zmdi zmdi-plus"></i>Download report
                             </button>
+                            <button class="au-btn au-btn-icon au-btn--blue" onclick="downloadMoq()">
+                                <i class="zmdi zmdi-plus"></i>Download MOQ
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -27,6 +30,7 @@
                                 <tr>
                                     <th>Stock</th>
                                     <th>Quantity</th>
+                                    <th>MOQ</th>
                                     <th>Per Unit</th>
                                 </tr>
                                 </thead>
@@ -35,6 +39,7 @@
                                     <tr>
                                         <td>{{$stock->stockCode->CODE}} - {{$stock->stockCode->DESCRIPTION}} </td>
                                         <td>{{$stock->QUANTITY}}</td>
+                                        <td>{{$stock->stockCode->MOQ}}</td>
                                         <td>{{$stock->stockCode->PRICE}}</td>
                                     </tr>
                                 @endforeach
@@ -57,6 +62,9 @@
 
         function downloadStock() {
             window.location.assign('{{url('/stocks/download')}}');
+        }
+        function downloadMoq() {
+            window.location.assign('{{url('/stocks/download_moq')}}');
         }
     </script>
 @endsection
