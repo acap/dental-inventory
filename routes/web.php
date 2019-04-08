@@ -11,6 +11,8 @@
 |
 */
 
+//use Illuminate\Routing\Route;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -32,6 +34,7 @@ Route::get('/stocks/list', 'StockController@list');
 Route::get('/stocks/add', 'StockController@add');
 Route::post('/stocks/post_add', 'StockController@post_add');
 Route::get('/stocks/download', 'StockController@download');
+Route::get('/stocks/download_moq', 'StockController@download_moq');
 
 Route::get('/stockCodes/list', 'StockCodeController@list');
 Route::get('/stockCodes/add', 'StockCodeController@add');
@@ -56,7 +59,21 @@ Route::post('/ownerConfigurations/post_edit', 'ConfigurationController@post_edit
 Route::get('/vendors/add','VendorController@add');
 Route::post('/vendors/post_add','VendorController@post_add');
 Route::get('/vendors/list','VendorController@list');
-Route::get('/vendors/detail/{ID}','VendorController@detail');
+Route::get('/vendors/detail/{id}','VendorController@detail');
+Route::get('/vendors/edit/{id}','VendorController@edit');
+Route::post('/vendors/post_edit','VendorController@post_edit');
+
+
+Route::get('/deliveries/list','DeliveryController@list');
+Route::get('/deliveries/add','DeliveryController@add');
+Route::post('/deliveries/post_add','DeliveryController@post_add');
+Route::get('/deliveries/detail{id}','DeliveryController@detail');
+
+
+
+
+
+
 
 Route::get('/login', function (){
     return view('login');
