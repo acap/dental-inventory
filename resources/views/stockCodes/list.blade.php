@@ -18,44 +18,41 @@
 
                 <div class="row">
                     <div class="col-md-12 m-t-25">
-                        <div class="card">
-                            <div class="card-header">Stock Codes</div>
-                            <div class="card-body">
-                                <div class="card-title">
-                                    <h3 class="text-center title-2">Stock Code List</h3>
-                                </div>
-                                <div class="row">
-                                    <div class="col-md-12">
-                                        <div class="table-responsive table--no-card m-b-30">
-                                            <table class="table table-borderless table-striped table-earning">
-                                                <thead>
-                                                <tr>
-                                                    <th>ID</th>
-                                                    <th>Stock</th>
-                                                    <th>Quantity</th>
-                                                    <th>Price</th>
-                                                </tr>
-                                                </thead>
-                                                <tbody>
-                                                @foreach($stockCodeList as $stockCode)
-                                                    <tr class='clickable-row' data-href='{{url('/stockCodes/edit/' .$stockCode->CODE)}}' >
-                                                        <td>{{$stockCode -> ID}}</td>
-                                                        <td>{{$stockCode -> CODE}}</td>
-                                                        <td>{{$stockCode -> DESCRIPTION}}</td>
-                                                        <td>{{$stockCode -> PRICE}}</td>
-                                                    </tr>
-                                                @endforeach
-                                                </tbody>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+                        <div class="table-responsive table--no-card m-b-30">
+                            <table class="table table-borderless table-striped table-earning">
+                                <thead>
+                                <tr>
+                                    <th>ID</th>
+                                    <th>Stock</th>
+                                    <th>Quantity</th>
+                                    <th>Price</th>
+                                    <th>MOQ</th>
+                                    <th>Vendor</th>
+                                </tr>
+                                </thead>
+                                <tbody>
+                                @foreach($stockCodeList as $stockCode)
+                                    <tr class='clickable-row'
+                                        data-href='{{url('/stockCodes/edit/' .$stockCode->CODE)}}'>
+                                        <td>{{$stockCode -> ID}}</td>
+                                        <td>{{$stockCode -> CODE}}</td>
+                                        <td>{{$stockCode -> DESCRIPTION}}</td>
+                                        <td>{{$stockCode -> PRICE}}</td>
+                                        <td>{{$stockCode -> MOQ}}</td>
+                                        <td>{{$stockCode -> vendor -> COMPANY_NAME}}</td>
+                                    </tr>
+                                @endforeach
+                                </tbody>
+                            </table>
                         </div>
                     </div>
                 </div>
             </div>
         </div>
+    </div>
+    </div>
+    </div>
+    </div>
     </div>
 
 
@@ -63,11 +60,12 @@
 @section('main-script')
     <script>
 
-        jQuery(document).ready(function($) {
-            $(".clickable-row").click(function() {
+        jQuery(document).ready(function ($) {
+            $(".clickable-row").click(function () {
                 window.location = $(this).data("href");
             });
         });
+
         function addStockCode() {
             window.location.assign('{{url('/stockCodes/add')}}');
         }
